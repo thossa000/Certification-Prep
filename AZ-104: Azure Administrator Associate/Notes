@@ -1,0 +1,63 @@
+Storage Account
+Storage account resides in a region. Should be placed in the same region as your compute resource.
+
+Two tiers of Performance - Standard and Premium
+General Purpose V2 (GPv2)- Standard Performance
+Block Blob, Page Blob, File Shares - Premium Performance - these storage types require higher performance. Premium performance can only be selected for these storage types.
+
+Redundancy (progressively more redundant and expensive)
+LRS (Local) - 3 copies of the data stored in the same region and distribution zone
+ZRS (Zone) - 3 copies stored in the same region but different distribution zones
+GRS (Geographical) - 3 copies in the primary region and 3 copies in a secondary region (paired region)
+GZRS Geographical and Zone) - 3 copies are distributed over the primary regions distribution zone and another 3 copies are distributed across the paired region's distribution zone.
+
+Standard storage allows you to choose any level of redundancy but Premium only allows LRS/ZRS redundancy.
+
+
+Different storage types give different services:
+
+Blob - Used to store unstructured data, there are two types:
+	Block: Great for containers to store blocks of unstructured data. Azure Data Lake Gen2 sits on top of Blocks and provides POSIX ACLs, hierarchical name space, and APIs/integrations. 
+		Block provides access tiers to the data (Hot/Cold/Archive). Different tiers separate speed at which the data can be accessed, hot being real-time access and cold for data that must remain online but can wait to be loaded and not accessed immediately. Archive for long-term storage. Each tier of data storage comes at increasing cost per transaction.
+		Lifecycle management cycles data between tiers depending on usage.
+	
+	Page: Great for performing random read/writes on files.
+		Disks service - Disks use page blobs but abstract away that there is a storage account or page blob. Disks come in different types and sizes. Disks are used with VMs and AKS where the user does not have to think about Storage accounts. Disks are typically used in PROD workloads. They have tiers of cost depending on IOPs, throughput, and storage size. Disks can be dynamically changed depending on workload needs.
+		
+		Azure Files (SMB/NFS) - Disks provide file shares in Azure. Azure File Sync is used to sync files to on-prem Windows File Servers. Tiering can be set to store files directly in Azure files once a capacity of File share volume is reached.
+		
+		Queues: Small pieces of data. First in First out.
+		
+		Tables: Store key-value pairs. 
+	
+	Append: Great for adding data to the end of a file ex. Logs
+	
+	
+In Azure, navigate to Storage Accounts -> Select an Account -> Storage Explorer to view contents of storage account. Tables and Queues can be viewed/edited in Storage Explorer.
+
+Database Resources
+Applications require a database for their persistent data storage. Databases allows users to interact and view data. 
+Databases run on an Operating System. PAAS provides database software without the need to manage the underlying OS and infrastructure.
+
+SQL Server - Microsoft's database software.
+	Provides the ability to create relational DBs in a fixed schema. Data stored in tables. Tables use Rows to list individual records with columns to set attributes for each record.
+	
+	Azure SQL DB (PAAS Service) - A complete managed offering with SKUs with different levels of management and features.
+	Azure SQL MI (Managed Instance) - Runs in your Vnet and has a dedicated instance for more control. Provides Common Language Runtime, Cross Database Transaction, Distributed Partition Views and many other features.
+	Great to use when migrating On-Prem databases with Microsoft data migration service.
+	
+	Azure provides Hyperscale for distributed architecture for the Page servers that hold the data.  
+	
+	Open Source:
+	MySQL 
+	PostgreSQL - Has CITUS to provide increase scale and performance by sharding data across multiple servers. It is equivalent to Hyperscale.
+	MariaDB 
+	
+	
+	CosmosDB - DB software born in the cloud.
+		Multi model and multi consistency. Ability to pick replication and data consistency across multiple DBs in multiple regions. Can set a master DB to write to which replicates across regions. Or have edits on multiple DBs which sync with another (slower performance). 
+		Multi model allows different models for data. Ie:
+		Documentation - use SQL and MongoDB
+		Dolumns - use Cassandra
+		Tables
+		Graphs - Gremlin
