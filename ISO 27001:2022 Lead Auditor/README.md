@@ -160,48 +160,48 @@ ISO 27001 has 26 required activities (Clauses 4-10) and 17 required documentatio
 ### Required Activities
 |Sub-Clause|Description|
 |:-:|:-:|
-|4.1|
-|4.2|
-|4.3|
-|4.4|
-|5.1|
-|5.2|
-|5.3|
-|6.1.1|
-|6.1.2|
-|6.1.3|
-|6.2|
-|7.1|
-|7.2|
-|7.3|
-|7.4|
-|7.5|
-|8.1|
-|8.2|
-|8.3|
-|9.1|
-|9.2|
-|9.3|
-|10.1|
-|10.2|
+|4.1| Determine internal and external issues (drivers) affecting the scope.
+|4.2| Identify stakeholders and their information security requirements
+|4.3| Define the ISMS scope based on issues and stakeholders
+|4.4| Establish, implement, maintain, and improve ISMS.
+|5.1| Leadership commitment to the ISMS.
+|5.2| Establish an information security policy.
+|5.3| Assign and communicate ISMS roles and responsibilities.
+|6.1.1| Consider drivers and stakeholder requirements for risks and opportunities.
+|6.1.2| Establish and implement a measurable, repeatable risk assessment process.
+|6.1.3| Develop and implement a risk treatment process.
+|6.2| Define and document ISMS objectives.
+|7.1| Allocate adequate resources (financial, personnel, tooling, time) for ISMS.
+|7.2| Ensure personnel competency and retain evidence of competency.
+|7.3| Promote ISMS awareness and understanding among personnel.
+|7.4| Establish communication protocols for internal and external stakeholders.
+|7.5| Maintain and control ISMS documentation.
+|8.1| Plan, implement, and control processes required to meet objectives. Includes change control processes.
+|8.2| Perform risk assessments periodically, as defined in Clauses 6.1.2.
+|8.3| Execute risk treatment plans per the defined process in Clause 6.1.3.
+|9.1| Define metrics and monitor ISMS performance.
+|9.2| Conduct annual internal audits to evaluate ISMS effectiveness.
+|9.3| Perform top management reviews of ISMS performance at planned intervals.
+|10.1| Address ISMS nonconformities, conduct root cause analyses, and implement corrective actions.
+|10.2| Continuously improve the ISMS to achieve intended results.
 
 ### Required Documentation
 |Sub-Clause|Description|
 |:-:|:-:|
-|4.3|
-|5.2|
-|6.1.2|
-|6.1.3|
-|6.2|
-|7.2|
-|7.5|
-|8.1|
-|8.2|
-|8.3|
-|9.1|
-|9.2|
-|9.3|
-|10.2|
+|4.3| ISMS Scope
+|5.2| Information security policy
+|6.1.2| Risk assessment process documentation
+|6.1.3| Risk treatment process, including the Statement of Applicability (SOA)
+|6.2| Security objectives and related plans
+|7.2| Personnel competency
+|7.5| Documentation deemed necessary by the organization
+|8.1| Documentation ensuring processes are carried out as planned
+|8.2| Risk Register
+|8.3| Risk treatment plans
+|9.1| Results of monitoring and measurement activities
+|9.2| Internal audit program and report
+|9.3| Management review results
+|10.2| Nonconformities, corrections, and corrective actions
 
 ## ISO 27001 Revisions
 
@@ -238,6 +238,60 @@ Limits audit to specific offices, may include ciritical operations like headquar
 - Overly-Narrow Scope: Leaves critical systems unaudited, risking dissatisfied stakeholders and unmitigated risks.
 - Confusing Scope: Leads to internal confusion when reviewing scope, misdirected resources, and missed risks during audits.
 
-## Executing the Risk Assessment
+## Executing a Risk Assessment
 
+Fundamental requirements for ISO 27001 risk assessment are found across Clause 6.1,8.2,8.3. These provide a strong foundation to guide audit activies and enable continual improvement.
 
+### STEP 1: Establish and Document Risk Assessment Criteria
+Define how risks are measured (risk matrix). Set acceptable and unacceptable risk threshhold.
+### STEP 2: Identify Key Assets to Protect
+Use scenario-based Risk Assessment to identify Risk Owner, Likelihood and Impact, and Criticalitiy.
+### STEP 3: Identify RIsks Associated with Critical Scenarios
+Define risks where threats intersect with vulnerabilities.
+### STEP 4: Perform an Analysis of Each Risk
+Assess risks by likehood and impact. Qualatative or Quantataive
+### STEP 5: Develop a Risk Treatment Plan
+- Accept
+- Mitigate
+- Transfer
+- Avoid
+
+Maintain accepted/avoided risks in Risk Register for monitoring.
+
+### STEP 6: Reperform Analysis of Each Risk
+Reassess risks after treatment to calculate residual risk, verify that residual risk is within acceptance criteria and continue to monitor. Never close risks, accepted risks should be reviewed annually.
+
+### Required Documents
+- Risk Assessmentt Procedures
+- Risk Register
+- Risk Treatment Plans
+
+## Statement of Applicability (SOA)
+
+## Planning for Internal Audit
+
+## Top Management Review
+
+# Planning for the Audit
+
+## Overview of ISO 17021, ISO 27006, and IAF Mandatory Documents
+
+## Audit Team roles
+
+## Application Review
+
+## Building an audit program
+
+## Developing an annual audit plan
+
+# Executing the Audit
+
+## Opening Meeting
+
+## Conducting the audit
+
+## Closing Meeting
+
+## Drafting the Audit Report
+
+## Cerftificate Decisions
