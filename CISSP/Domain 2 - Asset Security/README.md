@@ -21,3 +21,13 @@ CASB - Network Based, sits between cloud and client to block requests that can c
 ***********************************************
 Chapter: 3. Change and Configuration Management
 ***********************************************
+### Configuration and asset management
+Configuration Management - Track specific Device settings. Versioning - Assigns a number to each version of a software. Normally 3 part decimal (ie. 1.1.1) Baseline - Expected settings of a system, a snapshot. 
+
+Standardize Naming and IP assignment to help track hardware and software .
+
+### Physical asset management
+Media Management - Track highly sensitive data on media hardware. 
+
+### Supply chain vulnerabilities
+End-of-Sale - No longer offered for purchase but still supported | End-of-Support - Vendor will reduce or stop support of a product, reduced security updates. | End-of-Life - No support at all, no support questions or security patching available 
