@@ -1,7 +1,7 @@
 # CISSP Cert Prep : 3. Security Architecture and Engineering
 
 ***********************************************
-Chapter: 1. Secure Design
+## Chapter: 1. Secure Design
 ***********************************************
 ### Secure design principles
 Access requests should be designated Subjects (Users, Processes) and objects (File, Memory) to improve design quality. 
@@ -49,7 +49,7 @@ Zero-Trust - Applies least privilege to network access. Do not provide access ba
 Trust but Verify - verify that users are working correctly and security controls are implemented correctly.
 
 ***********************************************
-Chapter: 2. Virtualization and Cloud Computing
+## Chapter: 2. Virtualization and Cloud Computing
 ***********************************************
 ### Cloud computing roles
 Cloud Service Partner - Offers add-on services on the cloud.
@@ -82,7 +82,7 @@ Cloud Controls Matrix - Help providers and customers understand detailed securit
 Edge Computing - Do data processing on device then send to cloud to limit cloud computing. Fog Computing - Compute at central computer in remote location before sending data to the cloud to lower cloud computing.
 
 ***********************************************
-Chapter: 3. Hardware Security
+## Chapter: 3. Hardware Security
 ***********************************************
 ### Hardware and firmware security
 Secure Boot - Ensure boot integrity by checking OS public key against the boot loader's hash. Decrypting the hash with the vendor's public key for integrity check.
@@ -94,7 +94,7 @@ Measured Boot - Each device in the boot chain measure the trust of the next devi
 Hardware Root of Trust - Ensure UEFI is not tampered. Storing keys to verify firmware integrity.
 
 ***********************************************
-Chapter: 4. Server Security Issues
+## Chapter: 4. Server Security Issues
 ***********************************************
 ### Server and database security
 Data Flow Control - Use Network devices and server OS to control bandwidth consumption, not controlling can lead to DOS attack.
@@ -116,7 +116,7 @@ Large-Scale Parallel Data, extremely large data sets processed by several comput
 peer2peer (p2p) - decentralized computing ie. bitcoin, BitTorrent, tor browser.
 
 ***********************************************
-Chapter: 5. Web Security Issues
+## Chapter: 5. Web Security Issues
 ***********************************************
 ### OWASP Top 10
 1. Broken access control 2. Cryptographic Failures 3. Injection Flaw 4. Insecure Design 5. Security Misconfiguration 6. Vulnerable and Outdated Components 7. Identifcation and Authentication Failures 8. Software and Data Integrity Failures 9. Security Logging and Monitoring Failures 10. Server-Side Request Forgery.
@@ -135,7 +135,7 @@ SSRF - Server-Side Request Forgery, Requests that attack a targets server rather
 Mitigate Privilege escalation through, input validation, OS/Platform/App patching, Least privilege, and DEP(Data Execution Prevention) / ASLR(Address Space Layout Randomization) technologies.
 
 ***********************************************
-Chapter: 6. Embedded Systems Security
+## Chapter: 6. Embedded Systems Security
 ***********************************************
 ### Industrial control systems
 3 Types ICS - SCADA (Supervisory Control and Data Acquisition) DCS (Distributed Control Systems) and PLC (Programmable Logic Controllers)
@@ -172,7 +172,7 @@ Wifi is often not available in Embedded system environments so cellular networks
 Radio is used where cellular is also not available.
 
 ***********************************************
-Chapter: 7. Encryption
+## Chapter: 7. Encryption
 ***********************************************
 ### Symmetric and asymmetric cryptography
 Keys are required for each person in the group of communication. To calculate the number of keys use the following formula n=number of people n(n-1)/2
@@ -206,5 +206,44 @@ One-Time Pad - Unbreakable encryption algorithm. One-Time shared key for sender 
 NIST cryptography Lifecycle - 1. Initiation, gather requirements for new system with CIA objectives of company. 2. Acquisition/Development - Figure out software, hardware, and cryptography requirements 3. Implementation and Assessment, configure and test system. 4. Operations and Maintenance, ensure continued secure operation of crypto system. 5. Sunset, stop using system and destroy/archive sensitive keying material.
 
 ***********************************************
-Chapter: 8. Symmetric Cryptography
+## Chapter: 8. Symmetric Cryptography
 ***********************************************
+### Data Encryption Standard
+DES - Data Encryption Standard, Designed by IBM in the 1970s. Developed a standard encryption algorithm for unclassified communication by the federal government. Before DES, different agencies used different algorithms.
+
+DES test advise - Block cipher operating on 64-bit blocks, 56 bit key. Now insecure.
+
+### 3DES
+3DES - Using DES algorithm on the same text 3 times with 1-3 keys. Using 1 key has no benefit is just as insecure as DES. 2DES is insecure to a meet-in-the-middle attack. 3DES is now insecure as well. 
+
+3DES test notes - block cipher on 64 bit blocks. With 3 keys, key length is 112bits. Phased out due to exploits. 
+
+### AES, Blowfish, and Twofish
+AES - Invented because of competition by NIST to replace DES. Original name Rijndael Algorithm, now known as AES (Advanced Encryption Standard). Like DES, AES uses a combo of substitution and transposition to achieve encryption.
+
+AES key facts - Block cipher operating on 128-bit blocks. Keylength of 128, 192, or 256 bits. All keys are considered secure today.
+
+Blowfish - Designed as a potential replacement for DES. Like DES uses a Feistel network and combining substitution and transposition.
+
+Blowfish key facts - Block cipher operating on 64-bit blocks. Key length can be chosen anywhere between 32 and 448 bits. No longer secure.
+
+Twofish - recommended instead of Blowfish, was in the competition that lost to Rijndael algorithm. Also uses Feistel network and combines substitution and transposition.
+
+Twofish Key Facts - Block Cipher on 128-bit blocks. Key length of 128, 192, or 256 bits. Considered secure today.
+
+### RC4
+RC4 - Symmetric stream cipher widely used to encrypt network communication. Invented by Ron Rivest in 1987. Was a proprietary trade secret until 1994. WIFI encryption for WEP and WPA allowed the use of RC4. Also SSL and TLS allowed RC4. RC4 uses pseudorandom keystream.
+
+RC4 Key Facts - Stream cipher. Variable length key between 40 bits and 2048 bits. No longer secure as of 2015.
+
+### Cipher modes
+Cipher Mode - How an algorithm encrypts and decrypts data. ECB (Electronic Codebook Mode), break plaintext into blocks and encrypt each block with the same key. cypher blocks can end up being the same causing a vulnerability.                   
+
+CBC (Cipher Block Chaining) Mode seeks to resolve the disadvantage of ECB. It feeds the previously encrypted block into the encryption of the next block, but the first plaintext is also fed a XOR IV (Initialization Vector) before being encrypted.  Then the ciphertext is XORed with the next plaintext block before being encrypted.                     
+
+CTR( Counter) Mode, generates a random value known as a Nonce and a Counter at 0. The Nonce is encrypted with an encryption key the XORed with the  first plaintext block to create the first cyphertext block. For the next plaintext block the counter is incremented by 1 and the process repeats. Makes the block cypher act more like a stream cipher.                
+
+GCM (Galois/Counter Mode), adds authentication to the previous cipher modes.
+
+### Steganography
+Steganography - Hide text/information in image/audio/video by adjusting pixel, sound. Requires stego software to hide and extract data. Allows you to exfiltrate data and hide information in public domains.
