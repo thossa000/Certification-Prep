@@ -247,3 +247,49 @@ GCM (Galois/Counter Mode), adds authentication to the previous cipher modes.
 
 ### Steganography
 Steganography - Hide text/information in image/audio/video by adjusting pixel, sound. Requires stego software to hide and extract data. Allows you to exfiltrate data and hide information in public domains.
+
+***********************************************
+## Chapter: 9. Asymmetric Cryptography
+***********************************************
+
+### Rivest, Shamir, Adelman (RSA)
+RSA (Rivest, Shamir, Adelman) Algorithm - Asymmetric, users create RSA key pair using two large prime numbers. After some mathematical computation, RSA creates a private and public key. RSA is slow for communication, so instead it is used to create an initial secure communication channel over which a symmetric key is exchanged. The system then uses the symmetric key to encrypt communication for the remainder of the session. RSA was patented by MIT where Ron Rivest worked, but the patent expired in 2000.
+
+RSA Key Facts - Asymmetric, uses variable length key between 1024 and 4096 bits. Still considered secure today.
+
+### PGP and GnuPG
+PGP - Pretty Good Privacy, invented by Phil Zimmerman in 1991. Widely used in OpenPGP standard. Uses public and private key pairs but combines both symmetric and asymmetric cryptography.
+
+PGP encryption steps - 1. Plaintext is encrypted with random symmetric key, then the symmetric key is encrypted with the recipient's public key. 2. The recipient decrypts the symmetric key with their private key and then decrypts the message with the symmetric key.
+
+PGP has several commercial products but the open source package is GnuPG (Gnu Privacy Guard). GnuPG or GPG is available on all computing platforms. PGP is not an encryption algorithm itself. It is a frame work to use other encryption algorithms (ones  mentioned before).
+
+### Elliptic-curve and quantum cryptography
+Elliptic Curve Cryptography (ECC) - Does not depend on prime factorization like RSA. The difficulty of prime factorization problems is what  keeps RSA secure but requires heavier computing. ECC uses the EC discrete logarithm problem.
+
+Quantum Computing will be the next gen  of cryptography, Quantum computing will break ECC and potentially prime factorization cryptography. But will introduce new quantum algorithms for cryptography.
+
+***********************************************
+## Chapter: 10. Key Management
+***********************************************
+### Key exchange
+Out-of-Band Key Exchange - exchanging keys through a trusted channel, different than the one that will be used for communication. (ie. meeting face-to-face or telephone call to exchange key, however this is not very practical in most use cases.)
+
+In-Band Key Exchange - Exchanging key securely digitally. (ie. Diffie-Hellman key exchange).
+
+### Diffie-Hellman
+Diffie-Hellman - Invented in 1976 by 3 cryptographers, based on work by Ralph Merkle and turned into an algorithm by Diffie and Hellman. For this exchange the users start with two common numbers (one a prime number), each user then has a secret number, they then each compute a new value with their public key and private keys. The new value is shared with each other and computed to create a symmetric key. The symmetric key cannot be cracked without the private keys.
+
+Elliptic Curve Diffie-Hellman (ECDH) - Relies on EC Problem instead of Prime Factorization.
+
+### Key escrow
+Encryption Key Escrow - Allows law enforment to receive encryption keys through the implementation of a clipper chip. Received great controversy due to technology having government backdoors. The clipper chip was not adopted widely.
+
+Recovery Agents - Master key used to decrypt lost keys for an org. Product available from Microsoft but risky as it provides global access to all the orgs data.
+
+### Key stretching
+Key Stretching - Add strength to an encryption, salting (add value to key to make it more complex). Hashing (Adds time to the verification process by requiring more math.) These methods are often used for passwords. Hashing slows down brute force attacks by slowing down processing. Key Stretching algorithm commonly used PBKDF2 (Password-Based Key Derivation Function v2) and bcrypt (salt and hash with blowfish). Salting Hashing process should be repeated at least 4000 times.
+
+***********************************************
+## Chapter: 11. Public Key Infrastructure
+***********************************************
