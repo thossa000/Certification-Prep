@@ -293,3 +293,148 @@ Key Stretching - Add strength to an encryption, salting (add value to key to mak
 ***********************************************
 ## Chapter: 11. Public Key Infrastructure
 ***********************************************
+### Trust models
+Public Key Infrastructure - PKI, builds on web of trust principal. 
+
+### PKI and digital certificates
+PKI depends on highly trusted certificate authorities (CAs). CAs are trusted third-party orgs that verify identity before issuing a digital certificate that contains both identity info of the subject and their public key. 
+
+### Hash functions
+Hash function - One way function, takes content and converts to a fixed length output. Two different inputs must never have the same output. A hash is no longer secure if it is reversible or has collision.
+
+MD5 (Message Digest 5) by Ron Rivest, 5th iteration of MD. Message Digest means Hash. MD5 uses 128-bit hash. No longer secure found collision.
+
+SHA - created by NIST. SHA-1 procudes 160-bit value. No longer secure. SHA-2, family of 6 hash functions. Produces output of 224, 256, 384, and 512 bits. Mathematically similar to MD5 therefore will have same vulnerabilities but currently not vuln. SHA-3, came out in 2006, produces hash of any bit length selected by user with Keccak algorithm. Still secure.
+
+RIPEMD - Produce hash of 128,160,256, and 320 bits. 128 is no longer secure. 160-bit used in Bitcoin.
+
+Hash functions are used with asymmetric crypto for digital signatures and digital certificates.
+
+HMAC - Hash-based Message Authentication Code, combines symmetric crypto with hashing provides authentication and integrity with secret key.
+
+### Digital signatures
+Digital signatures provide - Authentication, owner of the public key is the one that signed the message. Integrity, the message was not altered. Non-Repudiation, the recipient can prove the prior two to a third party.
+
+Digital Signatures are opposite to asymmetric encryption. The public key is used to verify hash of the message since it was encrypted with the senders private key. This proves authenticity that the message was created by the sender. The goal isn't to send secret messages. If the message requires confidentiality, an added step must be taken to encrypt the message and also produce the digital signature.
+
+### Digital signature standard
+Digital Signature Standard, DSS - Published by NIST. Supports 3 different algos for digital signatures by government. Digital Signature Algorithm (DSA) similar to ElGamal algorithm, Rivest-Shamir-Adelman (RSA), Elliptic Curve Digital Signature Algorithm (ECDSA).
+
+### Create a digital certificate
+Digital certificates follow X.509 standard. So digital certificates can also be called X.509 certs.
+
+To create a digital certificate you must first, create a public/private key pair with your choice of algorithm (RSA, DSA, ECDSA). Then submit a CSR (Certificate Signing Request) with your public key and identifying information (Name, Email, server name) to a trusted third party for public use or private authority for internal use within your org. The CA (AKA Registration Authority (RA)) will then verify your identity, to avoid issuing an invalid certificate. Once the Identity is verified, the Public Key and identity info is removed and puts it in a format of an x.509 certificate. Then the CA uses its private key to place the CA's digital signature on your digital certificate. This x.509 cert is sent back to you to use to confirm your validity in the future.
+
+### Revoke a digital certificate
+Certificate Revocation List (CRL) - Serial numbers of revoked certificates. Certificates that no longer have confidential private keys. CRL is not very efficient because it requires you to check if a certificate is valid by downloading the list.
+
+Online Certificate Status Protocol (OCSP) - Provides real-time certificate status verification by CA. Used by most browsers except Google Chrome, they use their own verification tech.
+
+### Certificate stapling
+OSCP uses Certificate Stapling to relieve computational burden of checking cert status. Certificate validation is stapled by CA to OSCP server for 24 hours. So the validation doesn't need to occur on every request.
+
+### Certificate authorities
+Certificate Chaining - CAs can trust intermediate CAs (a CA from a company that is hosting their own internal CA, commonly for self-signed certs).
+
+Offline CA - Hosts the root key of a CA. This key is used to sign intermediate CAs of the same company which are considered Online CAs. The Online CAs are used to issue certs to customers.
+
+### Certificate subjects
+Certificate subject - Owner of a public key.
+
+Certificate Object Identifier - (ie 1.2.840.113549.1.1.11) Used to identify components of a digital certificate and its origins.
+
+Certificate Subjects - Not just for web servers but certificates can also be for SSH servers, file servers, email servers and more. Also can be used for SANs, routers, switches, VPNs, Access Points. ALso individuals emails/names. and developers for Code Signing.
+
+Certificate Pinning - Ties a cert to a subject for a period of time, if any changes occur to the cert in that time it is reported as a security issue.
+
+### Certificate types
+Different Types of certs - 1. Root Cert, core cert for a CA (their offline private key) root of trust in chain (intermediate) certs. 2. Wildcard cert, Cover an entire domain instead of one subject (ie. *.linkedin.com) only goes 1 level deep and does not certify multiple levels of a site.
+
+3 levels of verification a CA can do when issuing a cert - 1. Domain Validation (lowest level of trust) - verifies domain ownership. 2. Organizational Validation - Verifies business names. Extended Validation (Highest level of trust) - CA investigates existence of organization. 
+
+### Certificate formats
+Certificate Formats - 1. Distinguished Encoding Rules (DER), binary format uses .der .crt and .cer file extension. 2. Privacy Enhanced Mail (PEM), this name comes from an outdated standard but the cert format is still used, ASCII text format equivalent of DER to be human readable. Stored in .pem or .crt format.  3.  Personal Information Exchange (PFX), binary format. Commonly used by Windows systems. Uses .pfx or .p12 file extension. 4. P7B, ASCII text equivalent to PFX. On Windows systems and uses .p7b file extension.
+
+***********************************************
+## Chapter: 12. Cryptanalytic Attacks
+***********************************************
+### Knowledge-based attacks
+Frequency Analysis - Detect pattern in cypher text being generated by key. 
+
+Known Plaintext Attack - When an attacker has both the encrypted and plaintext message. Using this to crack the decryption key. Chosen Plaintext Attack - Use the algorithm to encrypt plaintext to learn the key being used. 
+
+Birthday Attack - Find collision in hash function by the use of probability. 
+
+### Eavesdropping attacks
+On-Path attacks - Man in the middle/browser attacks because the attacker is on the path to the intended service. 
+
+Replay Attack - when an attacker captures your authentication and uses it to start their own session with your account. Can be prevented with the use of unique tokens for each session or timestamps (both systems having the same time). 
+
+SSL Stripping - Trick browser into unencrypting a user's encrypted communication.
+
+### Implementation attacks
+Side-Channel Attack - Use encryption footprint to collect information being encrypted.
+
+Fault Injection Attack - Compromise integrity of cryptographic device through external fault (power failure, temp failure).
+
+Timing Attack - Measure how long encryption takes to gain more info on the cryptographic process.
+
+### Limitations of encryption algorithms
+Entropy - The predictability of cryptographic method. 
+
+Downgrade attack - (ie Poodle Attack) lower encryption strength by using weaker standard when the system is normally using stronger encryption.
+
+### Ransomware
+Mimikatz - Steal password from RAM.
+
+***********************************************
+## Chapter: 13. Physical Security
+***********************************************
+### Physical security personnel
+Two-Person Integrity - Requires two people enter sensitive areas together to lower the chance of illicit activity. Two-Person Control - Requiring two people to carry out an action (ie. missile launch)
+
+***********************************************
+## Chapter: 14. Threat Modeling
+***********************************************
+### Threat intelligence
+Threat Intel - Must have Timeliness, Accuracy, and Reliability to be a good source.
+
+### Managing threat indicators
+Threat Indicators - Malicious IP, file signatures, communication patterns that are common to an attacker. 
+
+Cyber Observable eXpression (CybOX) (Framework) - common schema to describe intrusion attempts, malicious software, and other observable security events when sharing info (classify threats).
+
+Structured Threat Info eXpression (STIX) (Language)- Takes CybOX framework properties and gives the language used to describe the properties.
+
+Trusted Automated eXchange of Indicator Info (TAXII) (Exchange)- used to share the information between systems and orgs written in STIX. 
+
+OpenIOC - Developed by Mandiant, used to share threat intel.
+
+### Intelligence sharing
+Teams that benefit from threat intel - Incident Response, Vulnerability Management, Risk Management, Security Engineering, Detection and Monitoring.
+
+### Threat research
+Threat Research - Using threat intel to identify potential malicious actors based on malicious IP, email, domain, etc. (Reputational Threat Research). Or if malicious actor doesn't have identifiable traits, their pattern of behavior can be used to identify past attackers (behavioral Threat Research). 
+
+Sources of Threat Research - Vendor websites, Vuln feeds, cyber conferences, academic journals, Request for Comment documents, Threat feeds, Social Media, and Adversary tactics, techniques, and procedures (TTP).
+
+### Identifying threats
+Threat Management - Structured Approach to potential threats, three approaches. 1. Asset Focus, Asset inventory to analyze threats. 2. Threat Focus, identify how specific known threats can affect your information systems. 3. Service Focus, identify the impact of threats to a specific service (internal or service provider).
+
+### Automating threat intelligence
+Threat Intel automation - 1. automatically blacklisting malicious IPs from threat feeds in Firewalls, IPS/IDS, and routers. 2. Combining multiple threat feeds 3. SIEM automation to trigger on events. 4. Data Enrichment (ie. perform recon on source IP of attacker, vuln scan of target system, and pull related logs to the event). 
+
+SOAR (Security Orchestration, Automation, and Response) - Enhance SIEM capabilities through automation.
+
+***********************************************
+## Chapter: 15. Software Security Architecture
+***********************************************
+### SOAP and REST
+Simple Object Acces Protocol (SOAP) - Was used for API but no longer, used XML format.  Modern APIs use REST (Representational State Transfer) - Use HTTPS protocol to have accessible RESTful APIs. 
+
+API Security - 1. Encrypt all API communication through HTTPS. 2. Secure distribution, storage, and transmission of API keys.
+
+### SOA and microservices
+Service-Oriented Architecture (SOA) - OpenGroup, a standards organization defines SOA with 4 characteristics. 1. Logical representations of a repeatable business activitiy with specified outcome. 2. Self-contained. 3. May be composed of other services. 4. Have Black-Box nature (users don't need to know how a service work, just what it does and how to use it). 
+
+SOA allows the integreation of services from different vendors. Microservices are fine-grained services in cloud environment.
