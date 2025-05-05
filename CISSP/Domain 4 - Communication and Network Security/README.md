@@ -103,3 +103,154 @@ Content Distribution Networks (CDN) (AKA Content Delivery Networks) - Seeks to a
 ***********************************************
 ## Chapter: 4. Network Security Techniques
 ***********************************************
+### Network access control
+NAC authentication occurs through 802.1X 
+
+NAC Posture Checking - Conducting security checks on supplicant machine before allowing network access.
+
+### Firewall rule management
+Shadowed Rules - Firewall rules that are never executed due to order of rules being executed. 
+
+Promiscuous rules - allow more access than necessary
+
+### Router configuration security
+Orphaned Rules - rules to allow access to decommissioned systems and services. Pose risk if the IP of the decommissioned server is reused for another server. 
+
+Firewalls vs Router ACL - Firewalls are purpose specific so much more efficient. Firewalls an make conditional rules. Firewalls offer more advanced security, integrate with IDS/IPS, perform traffic inspection, and threat intel. 
+
+Placing some ACL rules on routers can reduce burden on firewalls. 
+
+Routers allow Quality of Service (QOS) controls that prioritize critical network traffic by assigning bandwidth.
+
+### Switch configuration security
+VLAN Security -1. VLAN Pruning, limit unnecessary exposure of VLANs by limiting the number of switches that are trunked. 2. VLAN Trunk Negotiation, prevents VLAN hopping. 3. Port Security, only authorized MAC addresses to connect to switch. 4. DHCP Snooping, switch inspects DHCP messages to ensure they are coming from authorized DHCP servers.
+
+### Maintaining network availability
+Network Availability attacks - SYN Flood, flood connection state table on firewalls with half-open connections. MAC Flood, Fill MAC address table with many entries, flooding traffic on all ports. 
+
+Routing Loops - Allow broadcast storms, solution use Spanning Tree Protocol (STP) to prevent broadcast storms, by preventing loops. 
+
+STP - Uses Bridge Protocol Data Units, or BPDUs. If an attack can spoof BPDU they can cripple network. Ensure BPDU Guard is enabled to block malicious STP updates.
+
+### Network monitoring
+Ingress Filtering - logs for inbound traffic (monitor for inbound attacks). Egress Filtering - logs for outbound traffic (monitor for malicious activity on your network). 
+
+NetFlow Data - doesn't record full packets, instead captures source and destination system, source and destination ports, timestamps, and amount of data transferred.    
+
+NetFlow data logs are better than storing full packet logs because of storage considerations. And the missing info in NetFlow data logs can often be inferred based on the information.
+
+### SNMP
+SNMP - 3 components, 1. managed device (network device that receives SNMP commands) 2. Agent, agent that is installed on device for SNMP communication. 3. Network Management System, admin device for administration.    
+
+Requests are GetRequest/SetRequest and agent sends a Response. If the agent needs to send a message to the NMS it will send an SNMP Trap.
+
+### Deception technologies
+Darknets - Unused but monitored IP address space on a network, use of these IP address will trigger security response..  Honeyfiles - False sensitive data to alert admins of attack attempts. DNS Sinkhole - Altered DNS records on company DNS to reroute botnet traffic, alerting security team of botnet attack.
+
+***********************************************
+## Chapter: 5. Specialized Networking
+***********************************************
+### Telephony
+VoIP - Telephones over IP (convert analog voice to digital), should be secured with Encryption, and Network Segmentation when encryption isn't possible.
+
+### Multimedia collaboration
+Extensible Messaging and Presence Protocol (XMPP) - XMPP provider an open-source messaging protocol. 
+
+SMS Vulnerabilities, no encryption, and no authentication (easily spoofed)
+
+### Storage networks
+SAN vs NAS - NAS, shows as fileshare, SAN as dedicated drive. SAN come from dedicated network. 
+
+SAN can be used over Fiber-Channel, Fiber Channel over Ethernet, or iSCSI.
+
+***********************************************
+## Chapter: 6. Transport Encryption
+***********************************************
+### TLS and SSL
+Session Key for TLS encryption. Also known as ephemeral key. 
+
+SSL Inspection - inspects encrypted network traffic through a man-in-middle attack from your own firewall. 
+
+OpenSSL - Opensource TLS package.
+
+### IPsec
+IPsec - secures entire packet payload. IPsec uses Encapsulating Security Payload (ESP) provides confidentiality and integrity protection for packet payloads. Authentication Header (AH) Provides integrity protection (tamper proofing) for packet headers and payload. 
+
+IPsec - provides a list of cryptographic algorithms that a server is using through a Security Association (SA). 
+
+IPsec used in VPNs, Tunnel mode to create site-site VPNs making the two sites transparent to users. Transport Mode for end-user VPNs. Transport Mode VPNs are no longer common in favour of TLS VPNs.
+
+### Remote network access
+Remote Shell - Provide cmd access to a remote system (originally Telnet, now SSH). Remote Desktop - Graphical interface for remote systems (RDP).
+
+### Securing common protocols
+HTTPS - Uses TLS to first confirm website digital cert, then creating a session key (symmetric key) with the server. 
+
+SSH - Also creates ephemeral/session key to begin session with server. 
+
+Secure Copy (SCP) provides command-line file transfer over SSH. 
+
+FTPS - Adds TLS to FTP. SFTP - Adds SSH to FTP. 
+
+Real-Time Protocol (RTP) based VoIP service should instead use Secure RTP (SRTP). 
+
+Network time Protocol (NTP) should use NTPsec. 
+
+Email ports - POP - port 110 (encrypted port 995). IMAP port 143 (encrypted port 993). SMTP port 25 (encrypted port 465). 
+
+S/MIME - encrypt email at app layer. 
+
+DNSsec - Adds digital signature to DNS allowing verification of DNS records. 
+
+LDAPS - secure LDAP.
+
+***********************************************
+## Chapter: 7. Wireless Networking
+***********************************************
+### Understanding wireless networking
+Wifi devices use radio transmitters and receivers for communication. 
+
+Wifi Standards - 802.11 (1997) allows 2Mbps | 802.11b (1999) allows 11Mbps | 802.11g (2003) allows 22Mbps | 802.11n (2009) allows 600Mbps with MiMo antennas  | 802.11ac (2014) allows 1Gbps+
+
+### Wireless encryption
+WEP - wifi encryption, vulnerable. WPA - replaced WEP in 2003. Uses TKIP to rapidly rotate encryption key, now vulnerable. WPA2 - Released in 2004, uses AES encryption with CCMP, has potential vulnerabilities but still secure.  WPA3 (2020)-  Also supports CCMP but uses SAE (Simultaneous Authentication of Equals) for key exchange (based on DiffieHelmen).
+
+### Wireless authentication
+Wifi Authentication - Pre-shared keys (home wifi password) that is encrypted with PBKDF2 (key stretching). | Enterprise Authentication - Authorize wifi through Authentication Server. Used Lightweight EAP (LEAP) created by Cisco, insecure protocol using MS-CHAP. Using Protected EAP (PEAP) is recommended, tunnels EAP variant inside TLS session tunnel. 
+
+EAP Variants - There are over 100 versions of EAP. These are some: EAP-TLS, secure. EAP-TTLS, secure. EAP-FAST (Cisco), secure. EAP-MD5, insecure. 
+
+Captive Portals - another variant of wifi authentication, redirects to web page to authenticate.
+
+### Wireless signal propagation
+Omnidirectional antennas - send radio waves in all directions. Directional antennas, point waves in single direction. 802.11ac WAP - steers signal from omnidirectional antennas towards device. 
+
+Site Survey - Determine optimal AP placement through hardware and software testing. 
+
+Adjust radio frequency channels of wifi to avoid interference from nearby networks. 
+
+Manipulate WAP power level to adjust coverage.
+
+### Wireless networking equipment
+FAT Access Points - Contain all the hardware and software needed to operate wireless network. Thin Access Points - Rely on wireless controllers for configuration. Wireless controllers can improve wifi coverage by reducing interference, and adjusting power among WAPs. 
+
+Aircrack-ng - Wifi Analyzer used to search for rogue networks and test wifi security.
+
+***********************************************
+## Chapter: 8. Mobile Device Security
+***********************************************
+### Mobile device tracking
+Asset Tracking Lifecycle - 1. Device Request 2. Ordering and Receiving 3. Initial Configuration 4. Device Assignment 5. Device Decommissioning.
+
+### Mobile deployment models
+Choose Your Own Device - Employee picks device for company to purchase them to standardize hardware in company environment. 
+
+Company Owned, Personally Enabled - Allows generous personal use of Corporate owned devices.
+
+***********************************************
+## Chapter: 9. Host Security
+***********************************************
+### Malware prevention
+Virus - Malicious Code that spread by human action (Email Attachment, Download). Worms - Carry same payloads as Virus but spread by themselves on a network. Trojan Horses - Hides in what appears and functions like legitimate software, but with hidden payload. Spyware - Gather info from infected system (ie. Keystroke logger). 
+
+Endpoint Detection and Response (EDR) trigger automated response to attack on endpoint host. Can use Sandboxing to isolate malicious software.
